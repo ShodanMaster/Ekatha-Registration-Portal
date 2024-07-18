@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ID Card</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .center {
+            text-align: center;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .imgs{
+
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>ID Card</h1>
+    <table>
+        <tr>
+            <th colspan="2"><center>EKATHA PORTAL</center></th>
+        </tr>
+        {% if migrant_details %}
+        <tr>
+            
+            <td rowspan="5"><center><div class="imgs"></div><img src="{{ migrant_details.photo.url }}" alt="Photo" class="img-fluid"/></div></center></td>
+            <td><b>Username: </b>{{ username }}, Migrant</td>
+        </tr>
+        <tr>
+            <td><b>Name: </b>{{ migrant_details.name }}</td>
+        </tr>
+        <tr>
+            
+            <td><b>Gender: </b>{{ migrant_details.gender }}</td>
+        </tr>
+        <tr>
+            <td><b>Date of Birth: </b>{{ migrant_details.birth_date }}</td>
+        </tr>
+        <tr>
+            <table>
+                <tr>
+                    <td><b>Current Address: </b>{{migrant_details.current_address}}</th>
+                        <td><b>Native Address: </b>{{migrant_details.native_address}}</th>
+                </tr>
+            </table>
+        </tr>
+        {% elif contractor_details %}
+        <tr>
+            <td rowspan="7"><center><img src="{{ contractor_details.photo.url }}" alt="Photo" class="img-fluid"/></center></td>
+            <td><b>Username: </b>{{ username }}, Contractor</td>
+        </tr>
+        <tr>
+            <td><b>Name: </b>{{ contractor_details.name }}</td>
+        </tr>
+        <tr>
+            
+            <td><b>Gender: </b>{{ contractor_details.gender }}</td>
+        </tr>
+        <tr>
+            <td><b>Date of Birth: </b>{{ contractor_details.birth_date }}</td>
+        </tr>
+        <tr>
+            <td><b>Panchayath Licence Number: </b>{{ contractor_details.panchayathlicence }}</td>
+        </tr>
+        
+        <tr>
+            <td><b>GST: </b>{{ contractor_details.gstnum }}</td>
+        </tr>
+        <tr>
+            <table>
+                <tr>
+                    <td><b>Address: </b>{{contractor_details.address}}</th>
+                </tr>
+            </table>
+        </tr>
+            <!-- Print contractor details here -->
+        {% else %}
+            <tr>
+                <td>User Type</td>
+                <td>Unknown</td>
+            </tr>
+        {% endif %}
+    </table>
+    <a href="{% url 'cpdf' request.user.username %}" >Download PDF</a>
+</body>
+</html>

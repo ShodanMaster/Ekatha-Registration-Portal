@@ -1,0 +1,20 @@
+{% extends 'other/base.html' %} 
+{% block title %}Admin Panel{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header"><h1 style="color: #0355cc;">Hello Admin</h1></div>
+                <div class="card-body">
+                    <a href="{% url 'migranttable' %}" class="btn btn-outline-success btn-lg btn-block">Migrant Table</a>
+                    <a href="{% url 'contractortable' %}" class="btn btn-outline-success btn-lg btn-block">Contractor Table</a>
+                    <a href="/admin/auth/user/" class="btn btn-outline-success btn-lg btn-block">Verify</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'other/base.html' %} {% block title %}Migrant Table{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+<form class="mt-4">
+  <div class="input-group mb-3">
+      <input name="search" type="text" class="form-control" placeholder="Search by Username">
+      <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+</form>
+
+{% if messages %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+<hr>
+
+<table class="table table-striped" style="background-color: white;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th>user</th>
+        <th>name</th>
+        <th>photo</th>
+        <th>Verified</th>
+      </tr></th>
+    </thead>
+    <tbody>
+        {% for detail in details %}
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              {% if user.is_authenticated and user.is_superuser or is_contractor %}
+                <th><a href="{% url  'seedetails' detail.user %}">{{detail.user}}</a>
+                  </th>
+              {% else %}
+                <th>{{detail.user}}</th>
+              {% endif %}
+              <th>{{detail.name}}</th>
+              <td><img src="/media/{{ detail.photo }}" style="height: 100px"></td>
+              {%if detail.is_verified%}
+                <th>Yes <i class="fa fa-check-circle" aria-hidden="true"></i></th>
+              {%else%}
+                <th>No <i class="fa fa-times-circle" aria-hidden="true"></i></th>
+              {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="/">Home</a>
+
+  {% endblock %}

@@ -1,0 +1,182 @@
+{% block blockname %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>एकता</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <!-- font awesome style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="header_top">
+        <div class="container-fluid">
+          <div class="contact_nav">
+            <a href="">
+              <i class="fa fa-portal" aria-hidden="true"></i>
+              <span>
+                एकता
+              </span>
+            </a>
+            <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <span class="navbar-text" style="color: #0355cc;">{{user.username}}, {{user.userprofile.youare.name}}|<a class="nav-link" href="/logout/">Logout</a> </span>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="/logout/">Logout</a>
+            </li> -->
+            {% else %}
+              <a href="login">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>
+                  Login
+                </span>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="">
+              <span>
+                एकता
+              </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ">
+                {% if user.is_authenticated %}
+                <li class="nav-item active">
+                  <a class="nav-link" href="yourprofile"><i class="fa fa-user" aria-hidden="true"></i>Profile <span class="sr-only">(current)</span></a>
+                </li>
+                {% endif %}
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="about"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="service">Services</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contact">Contact Us</a>
+                </li> -->
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section ">
+      <div class="container ">
+        <div class="row">
+          <div class="col-md-6 ">
+            <div class="detail-box">
+              <h1>
+                एकता  <br>
+                Migrate to be one here,<br>
+                never to be left out.
+              </h1>
+              {% if user.is_authenticated %}
+              {% else %}
+                <a href="signup">
+                  Signup
+                </a>
+                {% endif %}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="img-box">
+              <img style="height: 600px; width: 700px;" src="{% static 'images/migrant.png' %}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  <!-- feature section -->
+  <section class="feature_section">
+    <a href="migrant_table">
+    <div class="container">
+      <div class="feature_container">
+        <div class="box">
+          <div class="img-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+            </svg>
+            <!-- <i class="fas fa-list"></i> -->
+            <!-- <img src="list.png" alt="List Icon"> -->
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512">
+              <path d="M62.707,31.293l-30-30a1,1,0,0,0-1.414,0l-30,30A1,1,0,0,0,2,33H7V57H6a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1H58a1,1,0,0,0,1-1V58a1,1,0,0,0-1-1H57V33h5a1,1,0,0,0,.707-1.707ZM57,61H7V59H57ZM9,57V32.414l23-23,23,23V57ZM56.414,31,32.707,7.293a1,1,0,0,0-1.414,0L7.586,31H4.414L32,3.414,59.586,31Z" />
+              <path d="M41,39H36V36a1,1,0,0,0-1-1H29a1,1,0,0,0-1,1v3H23a3,3,0,0,0-3,3v4a1,1,0,0,0,1,1h1v7a1,1,0,0,0,1,1H41a1,1,0,0,0,1-1V47h1a1,1,0,0,0,1-1V42A3,3,0,0,0,41,39ZM30,37h4v2H30ZM40,53H24V47h5v3a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V47h5Zm-9-6h2v2H31Zm11-2H22V42a1,1,0,0,1,1-1H41a1,1,0,0,1,1,1Z" />
+              <path d="M46,31H42.422a1,1,0,0,1,0-2H46a1,1,0,0,0,.916-1.4A5.992,5.992,0,0,0,36.231,27h-8.04a5.992,5.992,0,0,0-10.685.6,1,1,0,0,0,.916,1.4H22a1,1,0,0,1,0,2H18.422a1,1,0,0,0-.916,1.4,5.992,5.992,0,0,0,10.685.6h8.04a5.992,5.992,0,0,0,10.685-.6A1,1,0,0,0,46,31Zm-4.578,3a4,4,0,0,1-3.662-2.4,1,1,0,0,0-.916-.6H27.578a1,1,0,0,0-.916.6,3.991,3.991,0,0,1-6.3,1.4H22a3,3,0,0,0,0-6H20.359a3.991,3.991,0,0,1,6.3,1.4,1,1,0,0,0,.916.6h9.266a1,1,0,0,0,.916-.6,3.991,3.991,0,0,1,6.3-1.4h-1.64a3,3,0,0,0,0,6h1.64A3.988,3.988,0,0,1,41.422,34Z" /></svg>  -->
+          </div>
+          <h5 class="name"> 
+              Search Migrant
+          </h5>
+        </div>
+      </div>
+    </div>
+  </a>
+  </section>
+
+  <!-- end feature section -->
+
+  
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        For any Enquiry Email us on migregproj@gmail.com
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
+
+
+</body>
+
+</html>
+
+{% endblock blockname %}

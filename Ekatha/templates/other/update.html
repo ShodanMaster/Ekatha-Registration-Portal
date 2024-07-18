@@ -1,0 +1,89 @@
+{% extends 'other/base.html' %} 
+{% block title %}Update Table{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>Make Sure that You Update Worker Table With in a Week.</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+<div class="container">
+    {% if messages %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'updatetable' %}">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+<hr>
+
+<div class="container">
+    <form method="GET" action="{% url 'updatetable' %}">
+        <div class="input-group mb-3">
+            <input type="text" name="q" class="form-control" placeholder="Search by username or place">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <form method="GET" action="{% url 'updatetable' %}">
+        <div class="input-group mb-3">
+            <label for="fromDate" class="input-group-text">From Date</label>
+            <input type="date" name="f" class="form-control" placeholder="Search by from date">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+    
+    <form method="GET" action="{% url 'updatetable' %}">
+        <div class="input-group mb-3">
+            <label for="toDate" class="input-group-text">To Date</label>
+            <input type="date" name="t" class="form-control" placeholder="Search by to date">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr>
+
+<div class="container">
+    <table class="table table-striped" style="background-color: white;">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Place</th>                
+            </tr>
+        </thead>
+        <tbody>
+            {% for q in qset %}
+                <tr>                    
+                    <th scope="row"><a href="{% url 'seedetails' q.username %}">{{ q.username }}</a></th>
+                    <td>{{ q.from_date|date:"d/m/Y" }}</td>
+                    <td>{{ q.to_date|date:"d/m/Y" }}</td>
+                    <td>{{ q.place }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% endblock %}

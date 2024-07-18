@@ -1,0 +1,65 @@
+{% extends 'other/base.html' %} 
+{% block title %}Your Details{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white"><h1>User Details</h1></div>
+                <div class="card-body">
+
+                    {% if details_list_migrant %}
+                        <h2>{{request.user}} Details</h2>
+                        <ul class="list-group">
+                            {% if migrant_details.is_verified%}
+                                <li class="list-group-item text-success"><strong>Verified:</strong> Yes</li>
+                            {% else %}
+                                <li class="list-group-item text-danger"><strong>Verified:</strong> No</li>
+                            {% endif %}
+                            {% for field, value in details_list_migrant %}
+                                {% if 'photo' not in field %}
+                                    <li class="list-group-item"><strong>{{ field|title }}:</strong> {{ value }}</li>
+                                {% else %}
+                                    <li class="list-group-item"><strong>{{ field|title }}:</strong> <img src="{{ value.url }}" alt="{{ field }}" class="img-fluid rounded-circle"/></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% if migrant_details.is_verified%}
+                        <div>
+                            <a href="{% url 'idcard' request.user %}" target="_blank" class="btn btn-success btn-sm">View ID Card for {{ request.user }}</a>
+                        </div>
+                        {% endif %}
+                        
+
+                    {% elif details_list_contractor %}
+                        <h2> {{request.user}}</h2>
+                        <ul class="list-group">
+                            {% for field, value in details_list_contractor %}
+                                {% if 'photo' not in field %}
+                                    <li class="list-group-item"><strong>{{ field|title }}:</strong> {{ value }}</li>
+                                {% else %}
+                                    <li class="list-group-item"><strong>{{ field|title }}:</strong> <img src="{{ value.url }}" alt="{{ field }}" class="img-fluid rounded-circle"/></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <div class="mt-3">
+                            <h2><a href="{% url 'migranttable' %}" class="btn btn-success btn-sm">View Migrant Table</a></h2>
+                            <h2><a href="{% url 'updatetable' %}" class="btn btn-success btn-sm">Update Work Table</a></h2>
+                            <div>
+                                <a href="{% url 'idcard' request.user %}" target="_blank" class="btn btn-success btn-sm">View ID Card for {{ request.user }}</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning" role="alert">
+                            <h3 class="alert-heading">Please Submit Your Details <a href="{% url 'submitdetails' %}" class="btn btn-danger btn-sm">Here!</a></h3>
+                        </div>
+                    {% endif %}                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

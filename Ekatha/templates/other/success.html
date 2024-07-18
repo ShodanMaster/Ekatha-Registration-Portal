@@ -1,0 +1,19 @@
+{% extends 'other/base.html' %} 
+{% block title %}Success{% endblock %} 
+{% block content %}
+{% if messages %}
+<div class="card" style="background-color: green;">
+  <div class="card-header" style="color: white;">
+    <h1>Dear {{ user }},</h1>
+  </div>
+  <div class="card-body">
+    <h1 style="color: white;">Success!!!</h1>
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'other/base.html' %} {% block title %}ContractorTable{% endblock %}
+
+{% load crispy_forms_tags %}{% block content %}
+
+<form class="mt-4">
+    <div class="input-group mb-3">
+        <input name="search" type="text" class="form-control" placeholder="Search by Username">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+{% if messages %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <table class="table table-striped" style="background-color: white;">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th>user</th>
+            <th>name</th>
+            <th>photo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detail in details %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url  'seedetails' detail.user %}">{{detail.user}}</a></td>
+                <td>{{ detail.name }}</td>
+                <td><img src="/media/{{ detail.photo }}" style="height: 100px"></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="/">Home</a>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'other/base.html' %}
+{% block title %}Details{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Details</h1>
+            
+            {% if details_list %}
+                <!-- Add code here to display details for a non-migrant -->
+            
+
+          
+            {% with user_value=None %}
+                <ul class="list-group">
+                    {% for field, value in details_list %}
+                        
+                        {% if field == 'user' %}
+                            {% with user_value=value %}
+                            {% if is_contractor %}
+                                <a href="{% url 'updatedtable' user_value %}"><button class="btn btn-success"> See Updation</button></a>
+                            {% endif %}
+                        {% endwith %}
+                        {% elif 'photo' not in field %}
+                            <li class="list-group-item">
+                                <strong>{{ field|title }}:</strong> {{ value }}
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">
+                                <strong>{{ field|title }}:</strong>
+                                <img src="{{ value.url }}" alt="{{ field }}" class="img-fluid rounded mx-auto d-block">
+                            </li>
+                            
+                        {% endif %}
+                        
+                    {% endfor %}
+                </ul>
+                {% endwith %}
+            {% else %}
+                <p class="text-center">No details available.</p>
+            {% endif %}
+            
+            
+        </div>
+        
+    </div>
+    
+</div>
+{% endblock %}

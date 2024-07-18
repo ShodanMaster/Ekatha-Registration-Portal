@@ -1,0 +1,34 @@
+{% extends 'other/base.html' %} {% block title %}Registration{% endblock %}
+{% load crispy_forms_tags %}{% block content %}
+
+<div class="container">
+    <!-- Your form goes here -->
+    <div class="card">
+        <!-- Display messages in a message box -->
+        <div class="card-header"><h1>{{user.userprofile.youare.name}} Details.</h1></div>
+        <div class="card-body">
+            {% if messages %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <form method="post" action="{% url 'submitdetails' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add Bootstrap JS and Popper.js scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% endblock %}
